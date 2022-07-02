@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import sys
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # 主应用目录
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 将 apps 目录加入 sys.path 便于路径识别和导包
+sys.path.insert(0, str(BASE_DIR / "apps"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -36,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 添加rest_framework模块
+    "rest_framework",
+    'home',
 ]
 
 MIDDLEWARE = [

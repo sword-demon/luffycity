@@ -1,5 +1,6 @@
 <template>
-    <div>hello</div>
+    <!-- 显示路由视图映射的组件 -->
+    <router-view></router-view>
 </template>
 
 <script setup>

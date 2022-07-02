@@ -1,6 +1,7 @@
 <template>
     <!-- 显示路由视图映射的组件 -->
     <router-view></router-view>
+    <!-- <router-link></router-link> -->
 </template>
 
 <script setup>

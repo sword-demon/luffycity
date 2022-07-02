@@ -72,9 +72,29 @@ WSGI_APPLICATION = 'luffycityapi.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    # 默认数据库配置
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'dj_db_conn_pool.backends.mysql',
+        'NAME': 'luffycity',
+        'PORT': 3306,
+        'HOST': '127.0.0.1',
+        'USER': 'luffycity_user',
+        'PASSWORD': 'luffycity',
+        'OPTIONS': {
+            # 连接选项配置 mysql8.0以上无需配置
+            'charset': 'utf8mb4'
+        },
+        # 连接池配置
+        'POOL_OPTIONS': {
+            # 连接池默认创建的链接对象的数量
+            'POOL_SIZE': 10,
+            # 连接池默认创建的链接对象的最大数量
+            'MAX_OVERFLOW': 10
+        }
     }
 }
 

@@ -27,3 +27,19 @@ class Nav(BaseModel):
         verbose_name = "导航菜单"
         # 复数形式和单数形式一样的
         verbose_name_plural = verbose_name
+
+
+class Banner(BaseModel):
+    """
+    轮播图模型
+    """
+    image = models.ImageField(upload_to="banner/%Y/", verbose_name='图片地址')
+    link = models.CharField(max_length=500, verbose_name='链接地址')
+    note = models.CharField(max_length=150, verbose_name='备注信息')
+    is_http = models.BooleanField(default=False, verbose_name='是否外网链接',
+                                  help_text="站点链接: http://www.baidu.com/book/")
+
+    class Meta:
+        db_table = "lf_banner"
+        verbose_name = '轮播广告'
+        verbose_name_plural = verbose_name

@@ -13,3 +13,6 @@ NAV_FOOTER_POSITION = 1
 NAV_HEADER_SIZE = 5
 # 底部导航的最大显示个数
 NAV_FOOTER_SIZE = 10
+
+# 轮播广告的最大显示个数
+BANNER_SIZE = 5

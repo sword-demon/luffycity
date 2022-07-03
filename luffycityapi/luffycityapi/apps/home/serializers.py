@@ -14,4 +14,4 @@ class NavModelSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Nav
-        fields = ["name", "link", "is_http"]
+        fields = ["id", "name", "link", "is_http"]

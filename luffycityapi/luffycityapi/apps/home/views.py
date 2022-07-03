@@ -1,28 +1,22 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django_redis import get_redis_connection
-
-# 日志引入
-import logging
-
-logger = logging.getLogger("django")
+import constants
+from rest_framework.generics import ListAPIView
+from .models import Nav
+from .serializers import NavModelSerializer
 
 
-class HomeAPIView(APIView):
-    def get(self, request):
-        """
-        测试代码
-        :param request:
-        :return:
-        """
-        # 测试日志功能
-        # logger.info("测试代码")
-        # logger.error("测试代码")
-        # logger.warn("测试代码")
-        # print("hello")
-        redis = get_redis_connection("sms_code")
-        # print(1/0)
-        # brother = ["张飞", "关羽", "刘备"]
-        brother = redis.lrange("brother", 0, -1)
-        return Response(brother, status.HTTP_200_OK)
+class NavHeaderListAPIView(ListAPIView):
+    """
+    顶部导航视图
+    """
+    queryset = Nav.objects.filter(position=constants.NAV_HEADER_POSITION,
+                                  is_show=True, is_deleted=False).order_by("orders", "-id")[:constants.NAV_HEADER_SIZE]
+    serializer_class = NavModelSerializer
+
+
+class NavFooterListAPIView(ListAPIView):
+    """
+    底部导航视图
+    """
+    queryset = Nav.objects.filter(position=constants.NAV_FOOTER_POSITION,
+                                  is_show=True, is_deleted=False).order_by("orders", "-id")[:constants.NAV_FOOTER_SIZE]
+    serializer_class = NavModelSerializer

@@ -1,10 +1,11 @@
 import constants
-from rest_framework.generics import ListAPIView
+from views import CacheListAPIView
+# from rest_framework.generics import ListAPIView
 from .models import Nav, Banner
 from .serializers import NavModelSerializer, BannerModelSerializer
 
 
-class NavHeaderListAPIView(ListAPIView):
+class NavHeaderListAPIView(CacheListAPIView):
     """
     顶部导航视图
     """
@@ -13,7 +14,7 @@ class NavHeaderListAPIView(ListAPIView):
     serializer_class = NavModelSerializer
 
 
-class NavFooterListAPIView(ListAPIView):
+class NavFooterListAPIView(CacheListAPIView):
     """
     底部导航视图
     """
@@ -22,7 +23,7 @@ class NavFooterListAPIView(ListAPIView):
     serializer_class = NavModelSerializer
 
 
-class BannerListAPIView(ListAPIView):
+class BannerListAPIView(CacheListAPIView):
     """
     轮播广告视图
     """

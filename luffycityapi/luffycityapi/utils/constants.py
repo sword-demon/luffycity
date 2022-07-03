@@ -16,3 +16,6 @@ NAV_FOOTER_SIZE = 10
 
 # 轮播广告的最大显示个数
 BANNER_SIZE = 5
+
+# 首页列表数据的缓存周期
+HOME_PAGE_CACHE_TIME = 60 * 60 * 24

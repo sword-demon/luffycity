@@ -4,6 +4,7 @@ cffi==1.15.1
 cryptography==37.0.2
 Deprecated==1.2.13
 Django==3.2.9
+django-cors-headers==3.13.0
 django-db-connection-pool==1.2.1
 django-redis==5.2.0
 djangorestframework==3.13.1

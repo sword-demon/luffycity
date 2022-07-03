@@ -8,11 +8,18 @@
                     /></router-link>
                 </div>
                 <ul class="nav">
-                    <li><router-link to="">免费课</router-link></li>
-                    <li><router-link to="">项目课</router-link></li>
-                    <li><router-link to="">学位课</router-link></li>
-                    <li><router-link to="">习题库</router-link></li>
-                    <li><router-link to="">路飞学城</router-link></li>
+                    <li
+                        v-for="navItem in nav.header_nav_list"
+                        :key="navItem.id"
+                    >
+                        <!-- 区分外网链接 -->
+                        <a :href="navItem.link" v-if="navItem.is_http">{{
+                            navItem.name
+                        }}</a>
+                        <router-link v-else :to="navItem.link">{{
+                            navItem.name
+                        }}</router-link>
+                    </li>
                 </ul>
                 <div class="search-warp">
                     <div class="search-area">
@@ -61,6 +68,17 @@
 
 
 <script setup>
+import nav from "../api/nav";
+
+// 请求头部导航
+nav.get_header_nav()
+    .then((res) => {
+        // console.log(res.data);
+        nav.header_nav_list = res.data;
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 </script>
 
 <style scoped>

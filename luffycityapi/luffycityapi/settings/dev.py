@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 将 apps 目录加入 sys.path 便于路径识别和导包
 sys.path.insert(0, str(BASE_DIR / "apps"))
+sys.path.insert(0, str(BASE_DIR / "utils"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -41,12 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # 添加rest_framework模块
     "rest_framework",
+    # cors 跨域子应用
+    'corsheaders',
+
     'home',
 ]
 
 MIDDLEWARE = [
+    # 跨域中间件 在 CommonMiddleware 上面即可
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +62,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS_ORIGIN_WHITELIST = (
+#     'http:127.0.0.1:3000',
+# )
+
+# 不允许 ajax 跨域请求时携带 cookie
+# CORS_ALLOW_CREDENTIALS = False
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'luffycityapi.urls'
 
@@ -141,6 +157,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 设置django的静态文件目录【手动创建】
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
+# 项目中存储上传文件的根目录【手动创建】
+MEDIA_ROOT = BASE_DIR / "uploads"
+# 访问上传文件的url地址前缀
+MEDIA_URL = "/uploads/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

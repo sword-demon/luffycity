@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'home',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,7 @@ WSGI_APPLICATION = 'luffycityapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# 配置数据库
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -300,3 +302,7 @@ CACHES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 # 设置session保存的位置对应的缓存配置项
 SESSION_CACHE_ALIAS = "session"
+
+# 告诉django 系统认证相关的功能用户模型类采用自定义的用户模型类
+# 格式：子应用目录名.模型类名
+AUTH_USER_MODEL = "users.User"

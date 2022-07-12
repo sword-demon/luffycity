@@ -8,9 +8,11 @@ django-cors-headers==3.13.0
 django-db-connection-pool==1.2.1
 django-redis==5.2.0
 djangorestframework==3.13.1
+djangorestframework-jwt==1.11.0
 packaging==21.3
 Pillow==9.1.1
 pycparser==2.21
+PyJWT==1.7.1
 PyMySQL==1.0.2
 pyparsing==3.0.9
 pytz==2022.1

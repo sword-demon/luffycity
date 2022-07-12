@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import datetime
+
 import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -262,6 +264,20 @@ LOGGING = {
 REST_FRAMEWORK = {
     # 自定义异常处理
     'EXCEPTION_HANDLER': 'luffycityapi.utils.exceptions.custom_exception_handler',
+    # 自定义认证
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',  # jwt认证
+        'rest_framework.authentication.SessionAuthentication',  # session认证
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+# jwt 认证相关配置项
+JWT_AUTH = {
+    # 设置jwt的有效期
+    # 权限系统最好设置短一点，越是安全性高的系统，token过期时间越短
+    # 一周有效
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=1)
 }
 
 # redis configration

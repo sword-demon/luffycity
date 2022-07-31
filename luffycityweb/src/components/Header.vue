@@ -48,7 +48,46 @@
                         <img class="imv2-search2" src="../assets/search.svg" />
                     </div>
                 </div>
-                <div class="login-bar">
+                <div
+                    class="login-bar logined-bar"
+                    v-show="store.state.user.user_id"
+                >
+                    <div class="shop-cart">
+                        <img src="../assets/cart.svg" alt="" />
+                        <span
+                            ><router-link to="/cart">购物车</router-link></span
+                        >
+                    </div>
+                    <div class="login-box">
+                        <router-link to="">我的课堂</router-link>
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                                <el-avatar
+                                    class="avatar"
+                                    size="50"
+                                    src="https://fuguangapi.oss-cn-beijing.aliyuncs.com/avatar.jpg"
+                                ></el-avatar>
+                            </span>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item :icon="UserFilled"
+                                        >学习中心</el-dropdown-item
+                                    >
+                                    <el-dropdown-item :icon="List"
+                                        >订单列表</el-dropdown-item
+                                    >
+                                    <el-dropdown-item :icon="Setting"
+                                        >个人设置</el-dropdown-item
+                                    >
+                                    <el-dropdown-item :icon="Position"
+                                        >注销登录</el-dropdown-item
+                                    >
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                </div>
+                <div class="login-bar" v-if="!store.state.user.user_id">
                     <div class="shop-cart full-left">
                         <img src="../assets/cart.svg" alt="" />
                         <span
@@ -74,6 +113,10 @@
 import { reactive } from "vue";
 import nav from "../api/nav";
 import Login from "./Login.vue";
+import { UserFilled, List, Setting, Position } from "@element-plus/icons-vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 // 控制登录框显示
 const state = reactive({

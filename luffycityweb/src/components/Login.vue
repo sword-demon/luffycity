@@ -57,8 +57,11 @@
 <script setup>
 import user from "../api/user";
 import { ElMessage } from "element-plus";
+import { useStore } from "vuex";
 
 const emit = defineEmits(["successhandle"]);
+
+const store = useStore();
 
 // 登录处理
 const loginHandler = () => {
@@ -80,6 +83,7 @@ const loginHandler = () => {
             } else {
                 sessionStorage.token = resp.data.token;
             }
+
             ElMessage.success("登录成功");
             // 登录后续处理，通知父组件登录成功，关闭弹窗
             user.account = "";
@@ -87,6 +91,13 @@ const loginHandler = () => {
             user.mobile = "";
             user.code = "";
             user.remember = false;
+
+            // vuex 存储用户登录信息，保存token，并根据用户的选择，是否记住密码
+            let payload = resp.data.token.split(".")[1]; // 载荷
+            let payload_data = JSON.parse(atob(payload)); // 用户信息
+            console.log(payload_data);
+            store.commit("login", payload_data);
+
             emit("successhandle");
         })
         .catch((err) => {

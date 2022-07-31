@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
 
 // 路由列表
 const routes = [
@@ -20,6 +21,16 @@ const routes = [
         name: 'Login',
         component: () => import('../views/Login.vue'),
     },
+    {
+        meta: {
+            title: '个人中心',
+            keepAlive: true,
+            authorization: true,
+        },
+        path: '/user', // uri访问地址
+        name: 'User',
+        component: () => import('../views/User.vue'),
+    },
 ]
 
 // 路由对象实例化
@@ -28,6 +39,17 @@ const router = createRouter({
     history: createWebHistory(),
     // 路由列表
     routes,
+})
+
+// 导航守卫
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+    // 登录状态验证
+    if (to.meta.authorization && !store.getters.getUserInfo) {
+        next({ name: 'Login' })
+    } else {
+        next()
+    }
 })
 
 // 暴露路由对象

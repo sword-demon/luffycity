@@ -277,7 +277,9 @@ JWT_AUTH = {
     # 设置jwt的有效期
     # 权限系统最好设置短一点，越是安全性高的系统，token过期时间越短
     # 一周有效
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=1)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=1),
+    # 自定义载荷函数
+    'JWT_PAYLOAD_HANDLER': 'luffycityapi.utils.authenticate.jwt_payload_handler'
 }
 
 # redis configration

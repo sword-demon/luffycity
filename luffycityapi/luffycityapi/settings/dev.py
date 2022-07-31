@@ -324,3 +324,7 @@ SESSION_CACHE_ALIAS = "session"
 # 告诉django 系统认证相关的功能用户模型类采用自定义的用户模型类
 # 格式：子应用目录名.模型类名
 AUTH_USER_MODEL = "users.User"
+
+# django 自定义认证
+# 重写了django的默认认证类
+AUTHENTICATION_BACKENDS = ['luffycityapi.utils.authenticate.CustomAuthBackend']
